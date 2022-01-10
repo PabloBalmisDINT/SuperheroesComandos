@@ -12,6 +12,8 @@
         MinWidth="700"
         Background="AliceBlue"
         Icon="assets/shield.ico">
+    
+    <!--Estilos y convertidores-->
     <Window.Resources>
         <local:FondoConverter x:Key="conversorFondo"></local:FondoConverter>
         <local:VisibilityConverter x:Key="conversorVisibilidad"></local:VisibilityConverter>
@@ -34,6 +36,8 @@
 
     </Window.Resources>
 
+    
+    <!--Input bindings-->
     <Window.InputBindings>
         <KeyBinding Command="{Binding Path=RetrocederCommand}"
                     Key="R"
@@ -42,53 +46,72 @@
                     Key="A"
                     Modifiers="Ctrl"></KeyBinding>
     </Window.InputBindings>
+
     
+    <!--Contenido de la ventana-->
     <DockPanel x:Name="superheroeDockPanel"
-                       Background="{Binding Path=HeroeActual.Heroe, Converter={StaticResource conversorFondo}}">
+               Background="{Binding Path=HeroeActual.Heroe, Converter={StaticResource conversorFondo}}">
         <DockPanel LastChildFill="False"
-                           DockPanel.Dock="Top">
+                   DockPanel.Dock="Top">
             <TextBlock DockPanel.Dock="Left"
-                               VerticalAlignment="Bottom"
-                               FontSize="40"
-                               Foreground="White"
-                               FontFamily="Segoe UI Black"
-                               Margin="10,0,0,0"
-                               Text="{Binding Path=HeroeActual.Nombre}">
+                       VerticalAlignment="Bottom"
+                       FontSize="40"
+                       Foreground="White"
+                       FontFamily="Segoe UI Black"
+                       Margin="10,0,0,0"
+                       Text="{Binding Path=HeroeActual.Nombre}">
                 <TextBlock.Effect>
                     <DropShadowEffect></DropShadowEffect>
                 </TextBlock.Effect>
             </TextBlock>
             <StackPanel Orientation="Horizontal"
-                                DockPanel.Dock="Right"
-                                VerticalAlignment="Bottom">
+                        DockPanel.Dock="Right"
+                        VerticalAlignment="Bottom">
                 <Image Source="assets/avengers.png"
-                               Visibility="{Binding Path=HeroeActual.Vengador,Converter={StaticResource conversorVisibilidad}}"
-                               Width="40"
-                               Margin="0,0,10,0"></Image>
+                       Visibility="{Binding Path=HeroeActual.Vengador,Converter={StaticResource conversorVisibilidad}}"
+                       Width="40"
+                       Margin="0,0,10,0"></Image>
                 <Image Source="assets/xmen.png"
-                               Visibility="{Binding Path=HeroeActual.Xmen,Converter={StaticResource conversorVisibilidad}}"
-                               Width="60"></Image>
+                       Visibility="{Binding Path=HeroeActual.Xmen,Converter={StaticResource conversorVisibilidad}}"
+                       Width="60"></Image>
             </StackPanel>
         </DockPanel>
 
         <StackPanel DockPanel.Dock="Bottom"
-                            Orientation="Horizontal"
-                            HorizontalAlignment="Center">
-            <Button Command="{Binding Path=RetrocederCommand}">Anterior</Button>
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+            <Button Command="{Binding Path=RetrocederCommand}">
+                <Image Source="./assets/arrow.png"
+                       Width="25"></Image></Button>
             <TextBlock x:Name="actualTextBlock"
-                               Style="{StaticResource contador}"
-                               Margin="5,0,0,5"
-                               Text="{Binding Path=Actual}"></TextBlock>
+                       Style="{StaticResource contador}"
+                       Margin="5,0,0,5"
+                       Text="{Binding Path=Actual}"></TextBlock>
             <TextBlock Style="{StaticResource contador}"
-                               Margin="0,0,0,5">/</TextBlock>
+                       Margin="0,0,0,5">/</TextBlock>
             <TextBlock x:Name="totalTextBlock"
-                               Style="{StaticResource contador}"
-                               Margin="0,0,5,5"
-                               Text="{Binding Path=Total}"></TextBlock>
-            <Button Command="{Binding Path=AvanzarCommand}">Siguiente</Button>
+                       Style="{StaticResource contador}"
+                       Margin="0,0,5,5"
+                       Text="{Binding Path=Total}"></TextBlock>
+            <Button Command="{Binding Path=AvanzarCommand}">
+                <Image Source="./assets/arrow.png"
+                       Width="25"
+                       RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="1"
+                                            ScaleX="-1" />
+                            <SkewTransform AngleY="0"
+                                           AngleX="0" />
+                            <RotateTransform Angle="0" />
+                            <TranslateTransform />
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+            </Button>
         </StackPanel>
         <Image Source="{Binding Path=HeroeActual.Imagen}"
-                       Stretch="UniformToFill"
-                       Margin="10"></Image>
+               Stretch="UniformToFill"
+               Margin="10"></Image>
     </DockPanel>
 </Window>

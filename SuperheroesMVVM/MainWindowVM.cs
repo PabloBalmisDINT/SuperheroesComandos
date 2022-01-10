@@ -57,7 +57,7 @@ namespace SuperheroesMVVM
         //servicios
         public SuperheroesService superheroesService;
 
-
+        //Constructores
         public MainWindowVM()
         {
             superheroesService = new SuperheroesService();
@@ -69,6 +69,7 @@ namespace SuperheroesMVVM
             RetrocederCommand = new RelayCommand(Anterior);
         }
 
+        //Metodos
         public void Siguiente()
         { 
             if (Actual < Total)
